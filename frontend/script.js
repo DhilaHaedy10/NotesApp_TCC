@@ -1,4 +1,4 @@
-const API = 'https://notes-backend-521926891872.asia-southeast2.run.app/';
+const API = 'https://notes-backend-521926891872.asia-southeast2.run.app/notes';
 
 const { createApp } = Vue;
 
