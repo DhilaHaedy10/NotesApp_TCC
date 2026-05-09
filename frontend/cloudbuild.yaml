@@ -1,0 +1,9 @@
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    dir: frontend
+    entrypoint: gcloud
+    args:
+      - app
+      - deploy
+      - app.yaml
+      - --quiet
