@@ -37,7 +37,15 @@ createApp({
     },
     async loadNotes() {
       const res = await fetch(API);
-      this.notes = await res.json();
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || 'Gagal memuat catatan');
+        this.notes = [];
+        return;
+      }
+
+      this.notes = Array.isArray(data) ? data : [];
     },
     async saveNote() {
       const { judul, isi } = this.form;
@@ -50,11 +58,17 @@ createApp({
       const url = this.editId ? `${API}/${this.editId}` : API;
       const method = this.editId ? 'PUT' : 'POST';
 
-      await fetch(url, {
+      const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ judul, isi }),
       });
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || 'Gagal menyimpan catatan');
+        return;
+      }
 
       this.closeModal();
       this.loadNotes();
@@ -68,7 +82,14 @@ createApp({
     async deleteNote(id) {
       if (!confirm('Hapus?')) return;
 
-      await fetch(`${API}/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || 'Gagal menghapus catatan');
+        return;
+      }
+
       this.loadNotes();
     },
   },

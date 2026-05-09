@@ -19,7 +19,7 @@
         <div class="notes" id="list">
           <div class="card" v-for="note in notes" :key="note.id">
             <div class="card-title">{{ note.judul }}</div>
-            <div class="card-date">{{ formatDate(note.tanggal_dibuat) }}</div>
+            <div class="card-date">{{ formatDate(note.createdAt) }}</div>
             <div>{{ note.isi }}</div>
 
             <div class="card-actions">
