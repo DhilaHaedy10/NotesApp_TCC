@@ -9,9 +9,6 @@ const db = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 
 db.getConnection((err, connection) => {
@@ -20,7 +17,7 @@ db.getConnection((err, connection) => {
     return;
   }
 
-  console.log('MySQL Connected (SSL)');
+  console.log('MySQL Connected');
   console.log('HOST:', process.env.DB_HOST);
   console.log('DB:', process.env.DB_NAME);
   connection.release();
