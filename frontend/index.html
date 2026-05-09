@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notes App</title>
-    <link rel="stylesheet" href="style.css?v=2" />
+    <link rel="stylesheet" href="style.css?v=3" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   </head>
   <body>
@@ -36,9 +36,11 @@
             <p class="card-preview">{{ note.isi }}</p>
 
             <div class="card-actions">
-              <button class="action-btn view" type="button" @click="viewNote(note)">Lihat</button>
-              <button class="action-btn edit" type="button" @click="editNote(note)">Edit</button>
-              <button class="action-btn delete" type="button" @click="deleteNote(note.id)">Hapus</button>
+              <button class="view-full-btn" type="button" @click="viewNote(note)">Lihat catatan</button>
+              <div class="secondary-actions">
+                <button class="action-btn edit" type="button" @click="editNote(note)">Edit</button>
+                <button class="action-btn delete" type="button" @click="deleteNote(note.id)">Hapus</button>
+              </div>
             </div>
           </div>
         </div>
@@ -86,6 +88,6 @@
       </div>
     </div>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
   </body>
 </html>

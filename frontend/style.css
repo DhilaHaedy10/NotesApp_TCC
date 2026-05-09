@@ -107,10 +107,15 @@ body {
   -webkit-box-orient: vertical;
 }
 
-.card-actions,
+.card-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.secondary-actions,
 .detail-actions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
 
@@ -125,6 +130,7 @@ button {
 .primary-btn,
 .fab,
 .save-btn,
+.view-full-btn,
 .action-btn {
   min-height: 40px;
   border: none;
@@ -135,7 +141,8 @@ button {
 
 .primary-btn,
 .fab,
-.save-btn {
+.save-btn,
+.view-full-btn {
   background: #2563eb;
   color: #ffffff;
 }
@@ -144,9 +151,9 @@ button {
   padding: 0 16px;
 }
 
-.action-btn.view {
-  background: #e0f2fe;
-  color: #075985;
+.view-full-btn {
+  width: 100%;
+  border: 1px solid #1d4ed8;
 }
 
 .action-btn.edit {
