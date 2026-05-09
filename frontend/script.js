@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/notes';
+const API = 'https://notes-backend-521926891872.asia-southeast2.run.app/';
 
 const { createApp } = Vue;
 
