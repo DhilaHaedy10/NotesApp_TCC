@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <!-- HEADER -->
+      <header class="header">
+        <h1>Notes App</h1>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="container">
+        <div class="notes" id="list">
+          <div class="card" v-for="note in notes" :key="note.id">
+            <div class="card-title">{{ note.judul }}</div>
+            <div class="card-date">{{ formatDate(note.tanggal_dibuat) }}</div>
+            <div>{{ note.isi }}</div>
+
+            <div class="card-actions">
+              <button type="button" @click="editNote(note)">Edit</button>
+              <button type="button" @click="deleteNote(note.id)">Hapus</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- BUTTON TAMBAH (PERSEGI) -->
+      <button class="fab" :class="{ center: notes.length === 0 }" type="button" @click="openModal">
+        + Tambah Catatan
+      </button>
+
+      <!-- MODAL -->
+      <div class="modal" v-if="isModalOpen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>{{ modalTitle }}</h3>
+            <button type="button" @click="closeModal">X</button>
+          </div>
+
+          <input v-model="form.judul" placeholder="Judul..." />
+          <textarea v-model="form.isi" placeholder="Tulis sesuatu..."></textarea>
+
+          <button class="save-btn" type="button" @click="saveNote">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
