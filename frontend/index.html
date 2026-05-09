@@ -16,15 +16,29 @@
 
       <!-- CONTENT -->
       <main class="container">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow">Daftar Catatan</p>
+            <h2>{{ notes.length }} Catatan</h2>
+          </div>
+          <button class="primary-btn" type="button" @click="openModal">+ Tambah</button>
+        </div>
+
         <div class="notes" id="list">
           <div class="card" v-for="note in notes" :key="note.id">
-            <div class="card-title">{{ note.judul }}</div>
-            <div class="card-date">{{ formatDate(note.createdAt) }}</div>
-            <div>{{ note.isi }}</div>
+            <div class="card-header">
+              <div>
+                <div class="card-title">{{ note.judul }}</div>
+                <div class="card-date">{{ formatDate(note.createdAt) }}</div>
+              </div>
+            </div>
+
+            <p class="card-preview">{{ note.isi }}</p>
 
             <div class="card-actions">
-              <button type="button" @click="editNote(note)">Edit</button>
-              <button type="button" @click="deleteNote(note.id)">Hapus</button>
+              <button class="action-btn view" type="button" @click="viewNote(note)">Lihat</button>
+              <button class="action-btn edit" type="button" @click="editNote(note)">Edit</button>
+              <button class="action-btn delete" type="button" @click="deleteNote(note.id)">Hapus</button>
             </div>
           </div>
         </div>
@@ -47,6 +61,27 @@
           <textarea v-model="form.isi" placeholder="Tulis sesuatu..."></textarea>
 
           <button class="save-btn" type="button" @click="saveNote">Simpan</button>
+        </div>
+      </div>
+
+      <!-- DETAIL MODAL -->
+      <div class="modal" v-if="selectedNote">
+        <div class="modal-content detail-modal">
+          <div class="modal-header">
+            <div>
+              <p class="eyebrow">Detail Catatan</p>
+              <h3>{{ selectedNote.judul }}</h3>
+            </div>
+            <button type="button" @click="closeDetail">X</button>
+          </div>
+
+          <div class="detail-date">{{ formatDate(selectedNote.createdAt) }}</div>
+          <p class="detail-text">{{ selectedNote.isi }}</p>
+
+          <div class="detail-actions">
+            <button class="action-btn edit" type="button" @click="editFromDetail">Edit</button>
+            <button class="action-btn delete" type="button" @click="deleteFromDetail">Hapus</button>
+          </div>
         </div>
       </div>
     </div>

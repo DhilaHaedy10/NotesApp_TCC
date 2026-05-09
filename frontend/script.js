@@ -8,6 +8,7 @@ createApp({
       notes: [],
       editId: null,
       isModalOpen: false,
+      selectedNote: null,
       form: {
         judul: '',
         isi: '',
@@ -77,7 +78,22 @@ createApp({
       this.editId = note.id;
       this.form.judul = note.judul;
       this.form.isi = note.isi;
+      this.selectedNote = null;
       this.openModal();
+    },
+    viewNote(note) {
+      this.selectedNote = note;
+    },
+    closeDetail() {
+      this.selectedNote = null;
+    },
+    editFromDetail() {
+      this.editNote(this.selectedNote);
+    },
+    async deleteFromDetail() {
+      const id = this.selectedNote.id;
+      this.closeDetail();
+      await this.deleteNote(id);
     },
     async deleteNote(id) {
       if (!confirm('Hapus?')) return;
