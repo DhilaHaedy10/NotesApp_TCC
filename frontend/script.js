@@ -1,4 +1,4 @@
-const API = 'https://notes-backend-521926891872.asia-southeast2.run.app/notes';
+const API = "https://notes-backend-521926891872.asia-southeast2.run.app/notes";
 
 const { createApp } = Vue;
 
@@ -10,14 +10,14 @@ createApp({
       isModalOpen: false,
       selectedNote: null,
       form: {
-        judul: '',
-        isi: '',
+        judul: "",
+        isi: "",
       },
     };
   },
   computed: {
     modalTitle() {
-      return this.editId ? 'Edit Catatan' : 'Tambah Catatan';
+      return this.editId ? "Edit Catatan" : "Tambah Catatan";
     },
   },
   mounted() {
@@ -25,7 +25,7 @@ createApp({
   },
   methods: {
     formatDate(date) {
-      return new Date(date).toLocaleString('id-ID');
+      return new Date(date).toLocaleString("id-ID");
     },
     openModal() {
       this.isModalOpen = true;
@@ -33,15 +33,15 @@ createApp({
     closeModal() {
       this.isModalOpen = false;
       this.editId = null;
-      this.form.judul = '';
-      this.form.isi = '';
+      this.form.judul = "";
+      this.form.isi = "";
     },
     async loadNotes() {
       const res = await fetch(API);
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || 'Gagal memuat catatan');
+        alert(data.message || "Gagal memuat catatan");
         this.notes = [];
         return;
       }
@@ -52,22 +52,22 @@ createApp({
       const { judul, isi } = this.form;
 
       if (!judul || !isi) {
-        alert('Isi semua!');
+        alert("Isi semua!");
         return;
       }
 
       const url = this.editId ? `${API}/${this.editId}` : API;
-      const method = this.editId ? 'PUT' : 'POST';
+      const method = this.editId ? "PUT" : "POST";
 
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ judul, isi }),
       });
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || 'Gagal menyimpan catatan');
+        alert(data.message || "Gagal menyimpan catatan");
         return;
       }
 
@@ -96,17 +96,17 @@ createApp({
       await this.deleteNote(id);
     },
     async deleteNote(id) {
-      if (!confirm('Hapus?')) return;
+      if (!confirm("Hapus?")) return;
 
-      const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API}/${id}`, { method: "DELETE" });
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || 'Gagal menghapus catatan');
+        alert(data.message || "Gagal menghapus catatan");
         return;
       }
 
       this.loadNotes();
     },
   },
-}).mount('#app');
+}).mount("#app");
